@@ -1,209 +1,207 @@
-# Clean Code PHP
+<h1 dir="rtl">Clean Code PHP</h1>
 
-## Table of Contents
+<h2  dir="rtl"><a id="table-of-contents" class="anchor" href="#table-of-contents"></a>فهرست مندرجات</h2>
 
-  1. [Introduction](#introduction)
-  2. [Variables](#variables)
-     * [Use meaningful and pronounceable variable names](#use-meaningful-and-pronounceable-variable-names)
-     * [Use the same vocabulary for the same type of variable](#use-the-same-vocabulary-for-the-same-type-of-variable)
-     * [Use searchable names (part 1)](#use-searchable-names-part-1)
-     * [Use searchable names (part 2)](#use-searchable-names-part-2)
-     * [Use explanatory variables](#use-explanatory-variables)
-     * [Avoid nesting too deeply and return early (part 1)](#avoid-nesting-too-deeply-and-return-early-part-1)
-     * [Avoid nesting too deeply and return early (part 2)](#avoid-nesting-too-deeply-and-return-early-part-2)
-     * [Avoid Mental Mapping](#avoid-mental-mapping)
-     * [Don't add unneeded context](#dont-add-unneeded-context)
-     * [Use default arguments instead of short circuiting or conditionals](#use-default-arguments-instead-of-short-circuiting-or-conditionals)
-  3. [Comparison](#comparison)
-     * [Use identical comparison](#use-identical-comparison)
-     * [Null coalescing operator](#null-coalescing-operator)
-  4. [Functions](#functions)
-     * [Function arguments (2 or fewer ideally)](#function-arguments-2-or-fewer-ideally)
-     * [Function names should say what they do](#function-names-should-say-what-they-do)
-     * [Functions should only be one level of abstraction](#functions-should-only-be-one-level-of-abstraction)
-     * [Don't use flags as function parameters](#dont-use-flags-as-function-parameters)
-     * [Avoid Side Effects](#avoid-side-effects)
-     * [Don't write to global functions](#dont-write-to-global-functions)
-     * [Don't use a Singleton pattern](#dont-use-a-singleton-pattern)
-     * [Encapsulate conditionals](#encapsulate-conditionals)
-     * [Avoid negative conditionals](#avoid-negative-conditionals)
-     * [Avoid conditionals](#avoid-conditionals)
-     * [Avoid type-checking (part 1)](#avoid-type-checking-part-1)
-     * [Avoid type-checking (part 2)](#avoid-type-checking-part-2)
-     * [Remove dead code](#remove-dead-code)
-  5. [Objects and Data Structures](#objects-and-data-structures)
-     * [Use object encapsulation](#use-object-encapsulation)
-     * [Make objects have private/protected members](#make-objects-have-privateprotected-members)
-  6. [Classes](#classes)
-     * [Prefer composition over inheritance](#prefer-composition-over-inheritance)
-     * [Avoid fluent interfaces](#avoid-fluent-interfaces)
-     * [Prefer final classes](#prefer-final-classes)
-  7. [SOLID](#solid)
-     * [Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)
-     * [Open/Closed Principle (OCP)](#openclosed-principle-ocp)
-     * [Liskov Substitution Principle (LSP)](#liskov-substitution-principle-lsp)
-     * [Interface Segregation Principle (ISP)](#interface-segregation-principle-isp)
-     * [Dependency Inversion Principle (DIP)](#dependency-inversion-principle-dip)
-  8. [Don’t repeat yourself (DRY)](#dont-repeat-yourself-dry)
-  9. [Translations](#translations)
+<ol dir="rtl">
+<li><a href="#introduction">مقدمه</a></li>
+<li><a href="#variables">متغیر ها</a><ul>
+<li><a href="#use-meaningful-and-pronounceable-variable-names">استفاده از نام های معنی دار و قابل تلفظ برای نام گذاری متغیر ها</a></li>
+<li><a href="#use-the-same-vocabulary-for-the-same-type-of-variable">استفاده از واژگان مشابه برای همان نوع متغیر</a></li>
+<li><a href="#use-searchable-names-part-1"> استفاده از واژگان قابل جستجو (قسمت اول)</a></li>
+<li><a href="#use-searchable-names-part-2"> استفاده از واژگان قابل جستجو (قسمت دوم)</a></li>
+<li><a href="#use-explanatory-variables">استفاده از متفیر های توضیح دهنده</a></li>
+<li><a href="#avoid-nesting-too-deeply-and-return-early-part-1">اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت اول)</a></li>
+<li><a href="#avoid-nesting-too-deeply-and-return-early-part-2">اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت دوم)</a></li>
+<li><a href="#avoid-mental-mapping">اجتناب از نقشه ذهنی</a></li>
+<li><a href="#don-t-add-unneeded-context">محتوا غیر ضروری را اضافه نکنید</a></li>
+<li><a href="#use-default-arguments-instead-of-short-circuiting-or-conditionals">استفاده از آرگومان های پیش فرض به جای شرط ها یا short circuiting</a></li>
+</ul>
+</li>
+<li><a href="#comparison">مقایسه</a><ul>
+<li><a href="#use-identical-comparison">استفاده از identical comparison </a></li>
+</ul>
+</li>
+<li><a href="#functions">توابع</a><ul>
+<li><a href="#function-arguments-2-or-fewer-ideally">آرگومان های توابع ( ۲ تا یا در حالت ایده آل کمتر)</a></li>
+<li><a href="#functions-should-do-one-thing">توابع باید یک چیز را انجام بدهند</a></li>
+<li><a href="#function-names-should-say-what-they-do">نام توابع باید بگوید چه کاری انجام می دهد</a></li>
+<li><a href="#functions-should-only-be-one-level-of-abstraction">توابع باید تنها یک سطح انتزاع داشته باشند</a></li>
+<li><a href="#dont-use-flags-as-function-parameters">از flags  پارمترهای در توابع استفاده نکنید</a></li>
+<li><a href="#avoid-side-effects">اجتناب از اثرات جانبی</a></li>
+<li><a href="#dont-write-to-global-functions">توابع عمومی ننویسید</a></li>
+<li><a href="#dont-use-a-singleton-pattern">از دیزاین پترن سینگلتون استفاده نکنید</a></li>
+<li><a href="#encapsulate-conditionals">کپسوله کردن شرط ها</a></li>
+<li><a href="#avoid-negative-conditionals">اجتناب از شرط های منفی</a></li>
+<li><a href="#avoid-conditionals">اجتناب از شرط ها</a></li>
+<li><a href="#avoid-type-checking-part-1">اجتناب از type-checking (قسمت اول)</a></li>
+<li><a href="#avoid-type-checking-part-2">اجتناب از type-checking (قسمت دوم)</a></li>
+<li><a href="#remove-dead-code">کدهای مرد را پاک کنید</a></li>
+</ul>
+</li>
+<li><a href="#objects-and-data-structures">اشیا و ساختارهای داده </a><ul>
+<li><a href="#use-object-encapsulation">استفاده از کپسوله سازی اشیا</a></li>
+<li><a href="#make-objects-have-privateprotected-members">اشیایی بسازید که اعضای private/protected داشته باشند</a></li>
+</ul>
+</li>
+<li><a href="#classes">کلاس ها</a><ul>
+<li><a href="#prefer-composition-over-inheritance">ترکیب را به ارث بری ترجیح بدهید</a></li>
+<li><a href="#avoid-fluent-interfaces">اجتناب از fluent interfaces </a></li>
+<li><a href="#prefer-final-classes">ترجیح تان کلاس های <code>final</code>  باشند</a></li>
+</ul>
+</li>
+<li><a href="#solid">SOLID</a><ul>
+<li><a href="#single-responsibility-principle-srp"> اصل Single Responsibility (SRP)</a></li>
+<li><a href="#openclosed-principle-ocp">Open/Closed اصل (OCP)</a></li>
+<li><a href="#liskov-substitution-principle-lsp">Liskov Substitution اصل (LSP)</a></li>
+<li><a href="#interface-segregation-principle-isp">Interface Segregation اصل (ISP)</a></li>
+<li><a href="#dependency-inversion-principle-dip">Dependency Inversion اصل (DIP)</a></li>
+</ul>
+</li>
+<li><a href="#dont-repeat-yourself-dry">خودت را تکرار نکن!</a></li>
+<li><a href="#translations">ترجمه ها</a></li>
+</ol>
+ 
 
-## Introduction
+<h3 id="variables" dir="rtl"><a class="anchor" name="variables" href="#variables"><span class="octicon octicon-link"></span></a>
+<a class="anchor" name="variables" href="#variables">
+<span class="octicon octicon-link"></span></a>
+مقدمه</h3>
 
-Software engineering principles, from Robert C. Martin's book
-[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
-adapted for PHP. This is not a style guide. It's a guide to producing
-readable, reusable, and refactorable software in PHP.
+<p dir="rtl">اصول مهندسی نرم افزار، از کتاب <a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882"><em>Clean Code</em></a>,
+ نوشته C. Martin، برای PHP سازگار شده است.این یک راهنما ساده نیست.این یک  راهنما برای تولید نرم افزار های با قابلیت خوانایی،استفاده مجدد، و قابل باز سازی در php  می باشد</p>
 
-Not every principle herein has to be strictly followed, and even fewer will be universally
-agreed upon. These are guidelines and nothing more, but they are ones codified over many
-years of collective experience by the authors of *Clean Code*.
 
-Inspired from [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript).
+<p dir="rtl">
+هیچ اصل و اصولی در اینجا الزامی نیست و به صورت عمومی توافقی نشده است.اینها یکسری دستور العمل هست نه بیشتر اما تمام آن بر اساس  تجربه چندین ساله جمعی از برنامه نویسان توسط نویسندگان کتاب
+  <em>clean code</em>
+  نوشته شده است. 
+</p>
 
-Although many developers still use PHP 5, most of the examples in this article only work with PHP 7.1+.
+<p dir="rtl">
+الهام گرفته از  <a href="https://github.com/ryanmcdermott/clean-code-javascript">clean-code-javascript</a>
+</p>
+<p dir="rtl">اگر چه بسیار از توسعه دهندگان هنوز از php ۵ استفاده می کنند ولی بیشتر مثال های ما در php 7.1 به بالا کار میکند.</p>
 
-## Variables
+<h3 id="introduction" dir="rtl"><a class="anchor" name="introduction" href="#introduction"><span class="octicon octicon-link"></span></a>
+<a class="anchor" name="introduction" href="#introduction">
+<span class="octicon octicon-link"></span></a>
+متغیر ها</h3>
 
-### Use meaningful and pronounceable variable names
-
-**Bad:**
+<h3 id="use-meaningful-and-pronounceable-variable-names" dir="rtl">
+<a class="anchor" name="use-meaningful-and-pronounceable-variable-names" href="#use-meaningful-and-pronounceable-variable-names">
+<span class="octicon octicon-link"></span></a>
+استفاده از نام های معنی دار و قابل تلفظ برای نام گذاری متغیر ها</h3>
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 $ymdstr = $moment->format('y-m-d');
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
+
 
 ```php
-declare(strict_types=1);
-
 $currentDate = $moment->format('y-m-d');
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use the same vocabulary for the same type of variable
+<h3 id="use-the-same-vocabulary-for-the-same-type-of-variable" dir="rtl">
+<a class="anchor" name="use-the-same-vocabulary-for-the-same-type-of-variable" href="#use-the-same-vocabulary-for-the-same-type-of-variable">
+<span class="octicon octicon-link"></span></a>استفاده از واژگان مشابه برای همان نوع متغیر</h3>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 getUserInfo();
 getUserData();
 getUserRecord();
 getUserProfile();
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 getUser();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use searchable names (part 1)
+<h3 dir="rtl" id="use-searchable-names-part-1">
+<a class="anchor" name="use-searchable-names-part-1" href="#use-searchable-names-part-1">
+<span class="octicon octicon-link"></span></a>استفاده از واژگان قابل جستجو (قسمت اول)</h3>
 
-We will read more code than we will ever write. It's important that the code we do write is
-readable and searchable. By *not* naming variables that end up being meaningful for
-understanding our program, we hurt our readers.
-Make your names searchable.
+<p die="rtl">
+ما بیشتر از آن که کد بنویسیم، کدها را میخوانیم.خیلی مهم  می باشد کد هایی که ما مینویسیم  با خوانایی بالا و قابل جستجو باشند. ما با انتخاب نام های نامفهوم و غیرقابل فهم در برنامه های مان به خوانایی کد آسیب میزنم.نام ها را  قابل جستجو انتخاب کنید.
+</p>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
-declare(strict_types=1);
-
-// What the heck is 448 for?
+//عدد  ۴۴۸ برای چی هست ?
 $result = $serializer->serialize($data, 448);
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 $json = $serializer->serialize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 ```
 
-### Use searchable names (part 2)
+<h3 dir="rtl" id="use-searchable-names-part-2">
+<a class="anchor" name="use-searchable-names-part-2" href="#use-searchable-names-part-2">
+<span class="octicon octicon-link"></span></a>استفاده از واژگان قابل جستجو (قسمت دوم)</h3>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
 
 ```php
-declare(strict_types=1);
-
-class User
-{
-    // What the heck is 7 for?
-    public $access = 7;
-}
-
-// What the heck is 4 for?
+// عدد ۴ برای چی هست?
 if ($user->access & 4) {
     // ...
 }
-
-// What's going on here?
-$user->access ^= 2;
 ```
 
-**Good:**
+<p  dir="rtl"><strong>خوب:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 class User
 {
-    public const ACCESS_READ = 1;
-
-    public const ACCESS_CREATE = 2;
-
-    public const ACCESS_UPDATE = 4;
-
-    public const ACCESS_DELETE = 8;
-
-    // User as default can read, create and update something
-    public $access = self::ACCESS_READ | self::ACCESS_CREATE | self::ACCESS_UPDATE;
+    const ACCESS_READ = 1;
+    const ACCESS_CREATE = 2;
+    const ACCESS_UPDATE = 4;
+    const ACCESS_DELETE = 8;
 }
 
 if ($user->access & User::ACCESS_UPDATE) {
     // do edit ...
 }
-
-// Deny access rights to create something
-$user->access ^= User::ACCESS_CREATE;
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use explanatory variables
+<h3 id="use-explanatory-variables" dir="rtl">
+<a class="anchor" name="use-explanatory-variables" href="#use-explanatory-variables">
+<span class="octicon octicon-link"></span></a>استفاده از متفیر های توضیح دهنده</h3>
 
-**Bad:**
+<p  dir="rtl"><strong>بد:</strong></p>
+
 
 ```php
-declare(strict_types=1);
-
-$address = 'One Infinite Loop, Cupertino 95014';
+$address = 'bozorgmeher st , valiasr st,tehran';
 $cityZipCodeRegex = '/^[^,]+,\s*(.+?)\s*(\d{5})$/';
 preg_match($cityZipCodeRegex, $address, $matches);
 
 saveCityZipCode($matches[1], $matches[2]);
 ```
 
-**Not bad:**
+<p dir="rtl">
+   <strong>بدک نیست:</strong>
+</p>
 
-It's better, but we are still heavily dependent on regex.
+<p dir="rtl">این بهتر شد ولی ما هنوز وابستگی شدیدی به regex  داریم.</p>
 
 ```php
-declare(strict_types=1);
-
-$address = 'One Infinite Loop, Cupertino 95014';
+$address = 'bozorgmeher st , valiasr st,tehran';
 $cityZipCodeRegex = '/^[^,]+,\s*(.+?)\s*(\d{5})$/';
 preg_match($cityZipCodeRegex, $address, $matches);
 
@@ -211,32 +209,29 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($city, $zipCode);
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
-Decrease dependence on regex by naming subpatterns.
+<p dir="rtl">با نامگذاری subpattern ها وابستگی به regex را کاهش دادیم.</p>
 
 ```php
-declare(strict_types=1);
-
-$address = 'One Infinite Loop, Cupertino 95014';
+$address = 'bozorgmeher st , valiasr st,tehran';
 $cityZipCodeRegex = '/^[^,]+,\s*(?<city>.+?)\s*(?<zipCode>\d{5})$/';
 preg_match($cityZipCodeRegex, $address, $matches);
 
 saveCityZipCode($matches['city'], $matches['zipCode']);
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid nesting too deeply and return early (part 1)
+<h3 id="avoid-nesting-too-deeply-and-return-early-part-1"  dir="rtl">
+<a class="anchor" name="avoid-nesting-too-deeply-and-return-early-part-1" href="#avoid-nesting-too-deeply-and-return-early-part-1">
+<span class="octicon octicon-link"></span></a>اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت اول)
+</h3>
+<p dir="rtl"> استفاده از if و else  های زیاد باعث کاهش خوانایی و پیچیدگی کد میشود.خوانایی و سادگی بهتر از پیچیدگی و گیج کنندگی است</p>
 
-Too many if-else statements can make your code hard to follow. Explicit is better
-than implicit.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 function isShopOpen($day): bool
 {
     if ($day) {
@@ -248,83 +243,90 @@ function isShopOpen($day): bool
                 return true;
             } elseif ($day === 'sunday') {
                 return true;
+            } else {
+                return false;
             }
+        } else {
             return false;
         }
+    } else {
         return false;
     }
-    return false;
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 function isShopOpen(string $day): bool
 {
     if (empty($day)) {
         return false;
     }
 
-    $openingDays = ['friday', 'saturday', 'sunday'];
+    $openingDays = [
+        'friday', 'saturday', 'sunday'
+    ];
 
     return in_array(strtolower($day), $openingDays, true);
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid nesting too deeply and return early (part 2)
 
-**Bad:**
+<h3 id="avoid-nesting-too-deeply-and-return-early-part-2"  dir="rtl">
+<a class="anchor" name="avoid-nesting-too-deeply-and-return-early-part-2" href="#avoid-nesting-too-deeply-and-return-early-part-2">
+<span class="octicon octicon-link"></span></a>اجتناب از ایجاد کدهای تودرتو و بازگشت(قسمت دوم)
+</h3>
+
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 function fibonacci(int $n)
 {
     if ($n < 50) {
         if ($n !== 0) {
             if ($n !== 1) {
                 return fibonacci($n - 1) + fibonacci($n - 2);
+            } else {
+                return 1;
             }
-            return 1;
+        } else {
+            return 0;
         }
-        return 0;
+    } else {
+        return 'Not supported';
     }
-    return 'Not supported';
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 function fibonacci(int $n): int
 {
     if ($n === 0 || $n === 1) {
         return $n;
     }
 
-    if ($n >= 50) {
-        throw new Exception('Not supported');
+    if ($n > 50) {
+        throw new \Exception('Not supported');
     }
 
     return fibonacci($n - 1) + fibonacci($n - 2);
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid Mental Mapping
+<h3 id="avoid-mental-mapping"  dir="rtl">
+<a class="anchor" name="avoid-mental-mapping" href="#avoid-mental-mapping">
+<span class="octicon octicon-link"></span></a>اجتناب از نقشه ذهنی</h3>
+<p dir="rtl">کاری نکنید کسی که کد شما را میخواند بیشتر زمانش صرف این شود که معنی این متغیر چیست؟خوانایی و سادگی بهتر از پیچیدگی و گیج کنندگی است.
+</p>
 
-Don’t force the reader of your code to translate what the variable means.
-Explicit is better than implicit.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 $l = ['Austin', 'New York', 'San Francisco'];
@@ -341,11 +343,9 @@ for ($i = 0; $i < count($l); $i++) {
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 $locations = ['Austin', 'New York', 'San Francisco'];
 
 foreach ($locations as $location) {
@@ -358,186 +358,183 @@ foreach ($locations as $location) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Don't add unneeded context
+<h3 id="don-t-add-unneeded-context" dir="rtl" >
+<a class="anchor" name="don-t-add-unneeded-context" href="#don-t-add-unneeded-context">
+<span class="octicon octicon-link"></span></a>محتوا غیر ضروری را اضافه نکنید</h3>
 
-If your class/object name tells you something, don't repeat that in your
-variable name.
 
-**Bad:**
+<p dir="rtl">اگر نام کلاس یا شی شما اطلاعاتی به شما میدهد لطفا آن را در نام متغیر ها تکرار نکنید.</p>
+
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 class Car
 {
     public $carMake;
-
     public $carModel;
-
     public $carColor;
 
     //...
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
-declare(strict_types=1);
-
 class Car
 {
     public $make;
-
     public $model;
-
     public $color;
 
     //...
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Use default arguments instead of short circuiting or conditionals
-
-**Not good:**
-
-This is not good because `$breweryName` can be `NULL`.
+<h3 id="use-default-arguments-instead-of-short-circuiting-or-conditionals" dir="rtl">
+<a class="anchor" name="use-default-arguments-instead-of-short-circuiting-or-conditionals" href="#use-default-arguments-instead-of-short-circuiting-or-conditionals">
+<span class="octicon octicon-link"></span></a>استفاده از آرگومان های پیش فرض به جای short circuit یا شرط ها</h3>    
+<p dir="rtl"><strong>خوب نیست:</strong></p>
+    <p dir="rtl">این خوب نیست چون <code dir="ltr">$breweryName</code> میتواند <code>NULL</code>  باشد.</p>
 
 ```php
-function createMicrobrewery($breweryName = 'Hipster Brew Co.'): void
+function createMicrobrewery($breweryName = 'بهنوش'): void
 {
-    // ...
+    // ...
 }
 ```
 
-**Not bad:**
-
-This opinion is more understandable than the previous version, but it better controls the value of the variable.
+<p dir="rtl"><strong>بدک نیست:</strong></p>
+<p dir="rtl">این کد قابل فهم تر از کد قبلی هست، اما بهتر است کنترل بهتری بر مقدار متغیر ها داشته باشد.</p>
 
 ```php
 function createMicrobrewery($name = null): void
 {
-    $breweryName = $name ?: 'Hipster Brew Co.';
+    $breweryName = $name ?: 'بهنوش';
+    // ...
+}
+```
+
+<p dir="rtl"><strong>خوب:</strong></p>
+
+<p dir="rtl"> شما میتوانید از  <a href="http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration">type hinting</a> استفاده کنید  و مطمئن شوید که  <code dir="ltr">$breweryName</code> هیچ موقع <code>NULL</code> نخواهد بود</p>
+
+```php
+function createMicrobrewery(string $breweryName = 'بهنوش'): void
+{
+    // ...
+}
+```
+
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
+
+<h2 id="comparison" dir="rtl"><a class="anchor" name="comparison" href="#comparison"><span class="octicon octicon-link"></span></a>مقایسه</h2>
+
+<h3 id="use-identical-comparison" dir="rtl">
+<a class="anchor" name="use-identical-comparison" href="#use-identical-comparison">
+<span class="octicon octicon-link"></span></a>استفاده از <a href="http://php.net/manual/en/language.operators.comparison.php">identical comparison</a> </h3>
+
+<p dir="rtl"><strong>خوب نیست:</strong></p>
+
+<p dir="rtl">یک مقایسه ساده که یک رشته را به عدد صحیح تبدیل میکند.</p>
+
+
+```php
+$a = '42';
+$b = 42;
+
+if ($a != $b) {
+   // هر کدی اینجا باشد  اجرا تخواهد شد.
+}
+```
+
+
+<p dir="rtl">مقایسه <code dir="ltr">$a != $b</code> به ما <code dir="ltr">FALSE</code> بر میگرداند اما در حقیقت باید <code dir="ltr">TRUE</code> برگرداند.چون رشته <code dir="ltr">42</code> تفاوت دارد با عدد صحیح <code dir="ltr">42</code></p>
+
+<p dir="rtl"><strong>خوب :</strong></p>
+<p dir="rtl"><strong>identical comparison</strong> نوع و مقدار را مقایسه میکند.</p>
+
+```php
+$a = '42';
+$b = 42;
+
+if ($a !== $b) {
+    // هر کدی اینجا باشد اجرا میشود.
+}
+```
+
+<p dir="rtl">مقایسه <code dir="ltr">$a !== $b</code> به ما  <code>TRUE</code> بر میگرداند.</p>
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
+
+
+## Functions
+
+### Function arguments (2 or fewer ideally)
+
+Limiting the amount of function parameters is incredibly important because it makes 
+testing your function easier. Having more than three leads to a combinatorial explosion 
+where you have to test tons of different cases with each separate argument.
+
+Zero arguments is the ideal case. One or two arguments is ok, and three should be avoided. 
+Anything more than that should be consolidated. Usually, if you have more than two 
+arguments then your function is trying to do too much. In cases where it's not, most 
+of the time a higher-level object will suffice as an argument.
+
+**Bad:**
+
+```php
+function createMenu(string $title, string $body, string $buttonText, bool $cancellable): void
+{
     // ...
 }
 ```
 
 **Good:**
 
- You can use [type hinting](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) and be sure that the `$breweryName` will not be `NULL`.
-
 ```php
-function createMicrobrewery(string $breweryName = 'Hipster Brew Co.'): void
+class MenuConfig
 {
-    // ...
+    public $title;
+    public $body;
+    public $buttonText;
+    public $cancellable = false;
+}
+
+$config = new MenuConfig();
+$config->title = 'Foo';
+$config->body = 'Bar';
+$config->buttonText = 'Baz';
+$config->cancellable = true;
+
+function createMenu(MenuConfig $config): void
+{
+    // ...
 }
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
-## Comparison
+### Functions should do one thing
 
-### Use [identical comparison](http://php.net/manual/en/language.operators.comparison.php)
-
-**Not good:**
-
-The simple comparison will convert the string in an integer.
-
-```php
-declare(strict_types=1);
-
-$a = '42';
-$b = 42;
-
-if ($a != $b) {
-    // The expression will always pass
-}
-```
-
-The comparison `$a != $b` returns `FALSE` but in fact it's `TRUE`!
-The string `42` is different than the integer `42`.
-
-**Good:**
-
-The identical comparison will compare type and value.
-
-```php
-declare(strict_types=1);
-
-$a = '42';
-$b = 42;
-
-if ($a !== $b) {
-    // The expression is verified
-}
-```
-
-The comparison `$a !== $b` returns `TRUE`.
-
-**[⬆ back to top](#table-of-contents)**
-
-### Null coalescing operator
-
-Null coalescing is a new operator [introduced in PHP 7](https://www.php.net/manual/en/migration70.new-features.php). The null coalescing operator `??` has been added as syntactic sugar for the common case of needing to use a ternary in conjunction with `isset()`. It returns its first operand if it exists and is not `null`; otherwise it returns its second operand.
+This is by far the most important rule in software engineering. When functions do more 
+than one thing, they are harder to compose, test, and reason about. When you can isolate 
+a function to just one action, they can be refactored easily and your code will read much 
+cleaner. If you take nothing else away from this guide other than this, you'll be ahead 
+of many developers.
 
 **Bad:**
-
 ```php
-declare(strict_types=1);
-
-if (isset($_GET['name'])) {
-    $name = $_GET['name'];
-} elseif (isset($_POST['name'])) {
-    $name = $_POST['name'];
-} else {
-    $name = 'nobody';
-}
-```
-
-**Good:**
-```php
-declare(strict_types=1);
-
-$name = $_GET['name'] ?? $_POST['name'] ?? 'nobody';
-```
-
-**[⬆ back to top](#table-of-contents)**
-
-## Functions
-
-### Function arguments (2 or fewer ideally)
-
-Limiting the amount of function parameters is incredibly important because it makes
-testing your function easier. Having more than three leads to a combinatorial explosion
-where you have to test tons of different cases with each separate argument.
-
-Zero arguments is the ideal case. One or two arguments is ok, and three should be avoided.
-Anything more than that should be consolidated. Usually, if you have more than two
-arguments then your function is trying to do too much. In cases where it's not, most
-of the time a higher-level object will suffice as an argument.
-
-**Bad:**
-
-```php
-declare(strict_types=1);
-
-class Questionnaire
+function emailClients(array $clients): void
 {
-    public function __construct(
-        string $firstname,
-        string $lastname,
-        string $patronymic,
-        string $region,
-        string $district,
-        string $city,
-        string $phone,
-        string $email
-    ) {
-        // ...
+    foreach ($clients as $client) {
+        $clientRecord = $db->find($client);
+        if ($clientRecord->isActive()) {
+            email($client);
+        }
     }
 }
 ```
@@ -545,65 +542,22 @@ class Questionnaire
 **Good:**
 
 ```php
-declare(strict_types=1);
-
-class Name
+function emailClients(array $clients): void
 {
-    private $firstname;
-
-    private $lastname;
-
-    private $patronymic;
-
-    public function __construct(string $firstname, string $lastname, string $patronymic)
-    {
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->patronymic = $patronymic;
-    }
-
-    // getters ...
+    $activeClients = activeClients($clients);
+    array_walk($activeClients, 'email');
 }
 
-class City
+function activeClients(array $clients): array
 {
-    private $region;
-
-    private $district;
-
-    private $city;
-
-    public function __construct(string $region, string $district, string $city)
-    {
-        $this->region = $region;
-        $this->district = $district;
-        $this->city = $city;
-    }
-
-    // getters ...
+    return array_filter($clients, 'isClientActive');
 }
 
-class Contact
+function isClientActive(int $client): bool
 {
-    private $phone;
+    $clientRecord = $db->find($client);
 
-    private $email;
-
-    public function __construct(string $phone, string $email)
-    {
-        $this->phone = $phone;
-        $this->email = $email;
-    }
-
-    // getters ...
-}
-
-class Questionnaire
-{
-    public function __construct(Name $name, City $city, Contact $contact)
-    {
-        // ...
-    }
+    return $clientRecord->isActive();
 }
 ```
 
@@ -632,7 +586,7 @@ $message->handle();
 **Good:**
 
 ```php
-class Email
+class Email 
 {
     //...
 
@@ -658,9 +612,7 @@ testing.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
-function parseBetterPHPAlternative(string $code): void
+function parseBetterJSAlternative(string $code): void
 {
     $regexes = [
         // ...
@@ -687,7 +639,7 @@ function parseBetterPHPAlternative(string $code): void
 
 **Bad too:**
 
-We have carried out some of the functionality, but the `parseBetterPHPAlternative()` function is still very complex and not testable.
+We have carried out some of the functionality, but the `parseBetterJSAlternative()` function is still very complex and not testable.
 
 ```php
 function tokenize(string $code): array
@@ -717,7 +669,7 @@ function lexer(array $tokens): array
     return $ast;
 }
 
-function parseBetterPHPAlternative(string $code): void
+function parseBetterJSAlternative(string $code): void
 {
     $tokens = tokenize($code);
     $ast = lexer($tokens);
@@ -729,7 +681,7 @@ function parseBetterPHPAlternative(string $code): void
 
 **Good:**
 
-The best solution is move out the dependencies of `parseBetterPHPAlternative()` function.
+The best solution is move out the dependencies of `parseBetterJSAlternative()` function.
 
 ```php
 class Tokenizer
@@ -765,7 +717,7 @@ class Lexer
     }
 }
 
-class BetterPHPAlternative
+class BetterJSAlternative
 {
     private $tokenizer;
     private $lexer;
@@ -791,19 +743,17 @@ class BetterPHPAlternative
 
 ### Don't use flags as function parameters
 
-Flags tell your user that this function does more than one thing. Functions should
-do one thing. Split out your functions if they are following different code paths
+Flags tell your user that this function does more than one thing. Functions should 
+do one thing. Split out your functions if they are following different code paths 
 based on a boolean.
 
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 function createFile(string $name, bool $temp = false): void
 {
     if ($temp) {
-        touch('./temp/' . $name);
+        touch('./temp/'.$name);
     } else {
         touch($name);
     }
@@ -813,8 +763,6 @@ function createFile(string $name, bool $temp = false): void
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 function createFile(string $name): void
 {
     touch($name);
@@ -822,7 +770,7 @@ function createFile(string $name): void
 
 function createTempFile(string $name): void
 {
-    touch('./temp/' . $name);
+    touch('./temp/'.$name);
 }
 ```
 
@@ -830,25 +778,23 @@ function createTempFile(string $name): void
 
 ### Avoid Side Effects
 
-A function produces a side effect if it does anything other than take a value in and
-return another value or values. A side effect could be writing to a file, modifying
+A function produces a side effect if it does anything other than take a value in and 
+return another value or values. A side effect could be writing to a file, modifying 
 some global variable, or accidentally wiring all your money to a stranger.
 
-Now, you do need to have side effects in a program on occasion. Like the previous
-example, you might need to write to a file. What you want to do is to centralize where
-you are doing this. Don't have several functions and classes that write to a particular
+Now, you do need to have side effects in a program on occasion. Like the previous 
+example, you might need to write to a file. What you want to do is to centralize where 
+you are doing this. Don't have several functions and classes that write to a particular 
 file. Have one service that does it. One and only one.
 
 The main point is to avoid common pitfalls like sharing state between objects without
-any structure, using mutable data types that can be written to by anything, and not
-centralizing where your side effects occur. If you can do this, you will be happier
+any structure, using mutable data types that can be written to by anything, and not 
+centralizing where your side effects occur. If you can do this, you will be happier 
 than the vast majority of other programmers.
 
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 // Global variable referenced by following function.
 // If we had another function that used this name, now it'd be an array and it could break it.
 $name = 'Ryan McDermott';
@@ -862,15 +808,12 @@ function splitIntoFirstAndLastName(): void
 
 splitIntoFirstAndLastName();
 
-var_dump($name);
-// ['Ryan', 'McDermott'];
+var_dump($name); // ['Ryan', 'McDermott'];
 ```
 
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 function splitIntoFirstAndLastName(string $name): array
 {
     return explode(' ', $name);
@@ -879,41 +822,34 @@ function splitIntoFirstAndLastName(string $name): array
 $name = 'Ryan McDermott';
 $newName = splitIntoFirstAndLastName($name);
 
-var_dump($name);
-// 'Ryan McDermott';
-
-var_dump($newName);
-// ['Ryan', 'McDermott'];
+var_dump($name); // 'Ryan McDermott';
+var_dump($newName); // ['Ryan', 'McDermott'];
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
 ### Don't write to global functions
 
-Polluting globals is a bad practice in many languages because you could clash with another
-library and the user of your API would be none-the-wiser until they get an exception in
+Polluting globals is a bad practice in many languages because you could clash with another 
+library and the user of your API would be none-the-wiser until they get an exception in 
 production. Let's think about an example: what if you wanted to have configuration array?
-You could write global function like `config()`, but it could clash with another library
+You could write global function like `config()`, but it could clash with another library 
 that tried to do the same thing.
 
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 function config(): array
 {
-    return [
+    return  [
         'foo' => 'bar',
-    ];
+    ]
 }
 ```
 
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 class Configuration
 {
     private $configuration = [];
@@ -925,17 +861,14 @@ class Configuration
 
     public function get(string $key): ?string
     {
-        // null coalescing operator
-        return $this->configuration[$key] ?? null;
+        return isset($this->configuration[$key]) ? $this->configuration[$key] : null;
     }
 }
 ```
 
-Load configuration and create instance of `Configuration` class
+Load configuration and create instance of `Configuration` class 
 
 ```php
-declare(strict_types=1);
-
 $configuration = new Configuration([
     'foo' => 'bar',
 ]);
@@ -958,8 +891,6 @@ There is also very good thoughts by [Misko Hevery](http://misko.hevery.com/about
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class DBConnection
 {
     private static $instance;
@@ -969,7 +900,7 @@ class DBConnection
         // ...
     }
 
-    public static function getInstance(): self
+    public static function getInstance(): DBConnection
     {
         if (self::$instance === null) {
             self::$instance = new self();
@@ -987,8 +918,6 @@ $singleton = DBConnection::getInstance();
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 class DBConnection
 {
     public function __construct(string $dsn)
@@ -996,15 +925,13 @@ class DBConnection
         // ...
     }
 
-    // ...
+     // ...
 }
 ```
 
 Create instance of `DBConnection` class and configure it with [DSN](http://php.net/manual/en/pdo.construct.php#refsect1-pdo.construct-parameters).
 
 ```php
-declare(strict_types=1);
-
 $connection = new DBConnection($dsn);
 ```
 
@@ -1017,8 +944,6 @@ And now you must use instance of `DBConnection` in your application.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 if ($article->state === 'published') {
     // ...
 }
@@ -1027,8 +952,6 @@ if ($article->state === 'published') {
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 if ($article->isPublished()) {
     // ...
 }
@@ -1041,14 +964,13 @@ if ($article->isPublished()) {
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
-function isDOMNodeNotPresent(DOMNode $node): bool
+function isDOMNodeNotPresent(\DOMNode $node): bool
 {
     // ...
 }
 
-if (! isDOMNodeNotPresent($node)) {
+if (!isDOMNodeNotPresent($node))
+{
     // ...
 }
 ```
@@ -1056,9 +978,7 @@ if (! isDOMNodeNotPresent($node)) {
 **Good:**
 
 ```php
-declare(strict_types=1);
-
-function isDOMNodePresent(DOMNode $node): bool
+function isDOMNodePresent(\DOMNode $node): bool
 {
     // ...
 }
@@ -1084,8 +1004,6 @@ just do one thing.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class Airplane
 {
     // ...
@@ -1107,8 +1025,6 @@ class Airplane
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 interface Airplane
 {
     // ...
@@ -1159,8 +1075,6 @@ The first thing to consider is consistent APIs.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 function travelToTexas($vehicle): void
 {
     if ($vehicle instanceof Bicycle) {
@@ -1174,9 +1088,7 @@ function travelToTexas($vehicle): void
 **Good:**
 
 ```php
-declare(strict_types=1);
-
-function travelToTexas(Vehicle $vehicle): void
+function travelToTexas(Traveler $vehicle): void
 {
     $vehicle->travelTo(new Location('texas'));
 }
@@ -1199,12 +1111,10 @@ Otherwise, do all of that but with PHP strict type declaration or strict mode.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 function combine($val1, $val2): int
 {
-    if (! is_numeric($val1) || ! is_numeric($val2)) {
-        throw new Exception('Must be of type Number');
+    if (!is_numeric($val1) || !is_numeric($val2)) {
+        throw new \Exception('Must be of type Number');
     }
 
     return $val1 + $val2;
@@ -1214,8 +1124,6 @@ function combine($val1, $val2): int
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 function combine(int $val1, int $val2): int
 {
     return $val1 + $val2;
@@ -1233,8 +1141,6 @@ in your version history if you still need it.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 function oldRequestModule(string $url): void
 {
     // ...
@@ -1252,8 +1158,6 @@ inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 function requestModule(string $url): void
 {
     // ...
@@ -1270,8 +1174,8 @@ inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 
 ### Use object encapsulation
 
-In PHP you can set `public`, `protected` and `private` keywords for methods.
-Using it, you can control properties modification on an object.
+In PHP you can set `public`, `protected` and `private` keywords for methods. 
+Using it, you can control properties modification on an object. 
 
 * When you want to do more beyond getting an object property, you don't have
 to look up and change every accessor in your codebase.
@@ -1287,8 +1191,6 @@ Additionally, this is part of [Open/Closed](#openclosed-principle-ocp) principle
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class BankAccount
 {
     public $balance = 1000;
@@ -1326,7 +1228,7 @@ class BankAccount
         $this->balance += $amount;
     }
 
-    public function getBalance(): int
+    public function getBalance(): int
     {
         return $this->balance;
     }
@@ -1356,8 +1258,6 @@ For more informations you can read the [blog post](http://fabien.potencier.org/p
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class Employee
 {
     public $name;
@@ -1369,15 +1269,12 @@ class Employee
 }
 
 $employee = new Employee('John Doe');
-// Employee name: John Doe
-echo 'Employee name: ' . $employee->name;
+echo 'Employee name: '.$employee->name; // Employee name: John Doe
 ```
 
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 class Employee
 {
     private $name;
@@ -1394,8 +1291,7 @@ class Employee
 }
 
 $employee = new Employee('John Doe');
-// Employee name: John Doe
-echo 'Employee name: ' . $employee->getName();
+echo 'Employee name: '.$employee->getName(); // Employee name: John Doe
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -1424,12 +1320,9 @@ relationship (Human->Animal vs. User->UserDetails).
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
-class Employee
+class Employee 
 {
     private $name;
-
     private $email;
 
     public function __construct(string $name, string $email)
@@ -1441,15 +1334,14 @@ class Employee
     // ...
 }
 
-// Bad because Employees "have" tax data.
+// Bad because Employees "have" tax data. 
 // EmployeeTaxData is not a type of Employee
 
-class EmployeeTaxData extends Employee
+class EmployeeTaxData extends Employee 
 {
     private $ssn;
-
     private $salary;
-
+    
     public function __construct(string $name, string $email, string $ssn, string $salary)
     {
         parent::__construct($name, $email);
@@ -1465,12 +1357,9 @@ class EmployeeTaxData extends Employee
 **Good:**
 
 ```php
-declare(strict_types=1);
-
-class EmployeeTaxData
+class EmployeeTaxData 
 {
     private $ssn;
-
     private $salary;
 
     public function __construct(string $ssn, string $salary)
@@ -1482,12 +1371,10 @@ class EmployeeTaxData
     // ...
 }
 
-class Employee
+class Employee 
 {
     private $name;
-
     private $email;
-
     private $taxData;
 
     public function __construct(string $name, string $email)
@@ -1496,9 +1383,9 @@ class Employee
         $this->email = $email;
     }
 
-    public function setTaxData(EmployeeTaxData $taxData): void
+    public function setTaxData(string $ssn, string $salary)
     {
-        $this->taxData = $taxData;
+        $this->taxData = new EmployeeTaxData($ssn, $salary);
     }
 
     // ...
@@ -1529,14 +1416,10 @@ on this topic written by [Marco Pivetta](https://github.com/Ocramius).
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class Car
 {
     private $make = 'Honda';
-
     private $model = 'Accord';
-
     private $color = 'white';
 
     public function setMake(string $make): self
@@ -1570,23 +1453,19 @@ class Car
 }
 
 $car = (new Car())
-    ->setColor('pink')
-    ->setMake('Ford')
-    ->setModel('F-150')
-    ->dump();
+  ->setColor('pink')
+  ->setMake('Ford')
+  ->setModel('F-150')
+  ->dump();
 ```
 
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 class Car
 {
     private $make = 'Honda';
-
     private $model = 'Accord';
-
     private $color = 'white';
 
     public function setMake(string $make): void
@@ -1636,21 +1515,19 @@ For more informations you can read [the blog post](https://ocramius.github.io/bl
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 final class Car
 {
     private $color;
-
+    
     public function __construct($color)
     {
         $this->color = $color;
     }
-
+    
     /**
      * @return string The color of the vehicle
      */
-    public function getColor()
+    public function getColor() 
     {
         return $this->color;
     }
@@ -1660,8 +1537,6 @@ final class Car
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 interface Vehicle
 {
     /**
@@ -1673,13 +1548,16 @@ interface Vehicle
 final class Car implements Vehicle
 {
     private $color;
-
+    
     public function __construct($color)
     {
         $this->color = $color;
     }
-
-    public function getColor()
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getColor() 
     {
         return $this->color;
     }
@@ -1712,8 +1590,6 @@ your codebase.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class UserSettings
 {
     private $user;
@@ -1740,9 +1616,7 @@ class UserSettings
 **Good:**
 
 ```php
-declare(strict_types=1);
-
-class UserAuth
+class UserAuth 
 {
     private $user;
 
@@ -1750,20 +1624,19 @@ class UserAuth
     {
         $this->user = $user;
     }
-
+    
     public function verifyCredentials(): bool
     {
         // ...
     }
 }
 
-class UserSettings
+class UserSettings 
 {
     private $user;
-
     private $auth;
 
-    public function __construct(User $user)
+    public function __construct(User $user) 
     {
         $this->user = $user;
         $this->auth = new UserAuth($user);
@@ -1790,8 +1663,6 @@ add new functionalities without changing existing code.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 abstract class Adapter
 {
     protected $name;
@@ -1857,8 +1728,6 @@ class HttpRequester
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 interface Adapter
 {
     public function request(string $url): Promise;
@@ -1916,12 +1785,9 @@ get into trouble.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class Rectangle
 {
     protected $width = 0;
-
     protected $height = 0;
 
     public function setWidth(int $width): void
@@ -1957,9 +1823,9 @@ function printArea(Rectangle $rectangle): void
 {
     $rectangle->setWidth(4);
     $rectangle->setHeight(5);
-
+ 
     // BAD: Will return 25 for Square. Should be 20.
-    echo sprintf('%s has area %d.', get_class($rectangle), $rectangle->getArea()) . PHP_EOL;
+    echo sprintf('%s has area %d.', get_class($rectangle), $rectangle->getArea()).PHP_EOL;
 }
 
 $rectangles = [new Rectangle(), new Square()];
@@ -2011,8 +1877,8 @@ class Square implements Shape
 
     public function getArea(): int
     {
-        return $this->length ** 2;
-    }
+        return $this->length ** 2;
+    }
 }
 
 function printArea(Shape $shape): void
@@ -2032,7 +1898,7 @@ foreach ($shapes as $shape) {
 ### Interface Segregation Principle (ISP)
 
 ISP states that "Clients should not be forced to depend upon interfaces that
-they do not use."
+they do not use." 
 
 A good example to look at that demonstrates this principle is for
 classes that require large settings objects. Not requiring clients to set up
@@ -2042,8 +1908,6 @@ all of the settings. Making them optional helps prevent having a "fat interface"
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 interface Employee
 {
     public function work(): void;
@@ -2083,8 +1947,6 @@ class RobotEmployee implements Employee
 Not every worker is an employee, but every employee is a worker.
 
 ```php
-declare(strict_types=1);
-
 interface Workable
 {
     public function work(): void;
@@ -2142,8 +2004,6 @@ it makes your code hard to refactor.
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 class Employee
 {
     public function work(): void
@@ -2179,8 +2039,6 @@ class Manager
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 interface Employee
 {
     public function work(): void;
@@ -2224,39 +2082,41 @@ class Manager
 
 Try to observe the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
 
-Do your absolute best to avoid duplicate code. Duplicate code is bad because
-it means that there's more than one place to alter something if you need to
+Do your absolute best to avoid duplicate code. Duplicate code is bad because 
+it means that there's more than one place to alter something if you need to 
 change some logic.
 
-Imagine if you run a restaurant and you keep track of your inventory: all your
+Imagine if you run a restaurant and you keep track of your inventory: all your 
 tomatoes, onions, garlic, spices, etc. If you have multiple lists that
 you keep this on, then all have to be updated when you serve a dish with
 tomatoes in them. If you only have one list, there's only one place to update!
 
 Often you have duplicate code because you have two or more slightly
 different things, that share a lot in common, but their differences force you
-to have two or more separate functions that do much of the same things. Removing
-duplicate code means creating an abstraction that can handle this set of different
+to have two or more separate functions that do much of the same things. Removing 
+duplicate code means creating an abstraction that can handle this set of different 
 things with just one function/module/class.
 
 Getting the abstraction right is critical, that's why you should follow the
 SOLID principles laid out in the [Classes](#classes) section. Bad abstractions can be
 worse than duplicate code, so be careful! Having said this, if you can make
-a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself
+a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself 
 updating multiple places any time you want to change one thing.
 
 **Bad:**
 
 ```php
-declare(strict_types=1);
-
 function showDeveloperList(array $developers): void
 {
     foreach ($developers as $developer) {
         $expectedSalary = $developer->calculateExpectedSalary();
         $experience = $developer->getExperience();
         $githubLink = $developer->getGithubLink();
-        $data = [$expectedSalary, $experience, $githubLink];
+        $data = [
+            $expectedSalary,
+            $experience,
+            $githubLink
+        ];
 
         render($data);
     }
@@ -2268,7 +2128,11 @@ function showManagerList(array $managers): void
         $expectedSalary = $manager->calculateExpectedSalary();
         $experience = $manager->getExperience();
         $githubLink = $manager->getGithubLink();
-        $data = [$expectedSalary, $experience, $githubLink];
+        $data = [
+            $expectedSalary,
+            $experience,
+            $githubLink
+        ];
 
         render($data);
     }
@@ -2278,15 +2142,17 @@ function showManagerList(array $managers): void
 **Good:**
 
 ```php
-declare(strict_types=1);
-
 function showList(array $employees): void
 {
     foreach ($employees as $employee) {
         $expectedSalary = $employee->calculateExpectedSalary();
         $experience = $employee->getExperience();
         $githubLink = $employee->getGithubLink();
-        $data = [$expectedSalary, $experience, $githubLink];
+        $data = [
+            $expectedSalary,
+            $experience,
+            $githubLink
+        ];
 
         render($data);
     }
@@ -2298,12 +2164,14 @@ function showList(array $employees): void
 It is better to use a compact version of the code.
 
 ```php
-declare(strict_types=1);
-
 function showList(array $employees): void
 {
     foreach ($employees as $employee) {
-        render([$employee->calculateExpectedSalary(), $employee->getExperience(), $employee->getGithubLink()]);
+        render([
+            $employee->calculateExpectedSalary(),
+            $employee->getExperience(),
+            $employee->getGithubLink()
+        ]);
     }
 }
 ```
@@ -2333,5 +2201,5 @@ This is also available in other languages:
    * [yujineeee/clean-code-php](https://github.com/yujineeee/clean-code-php)
 * :tr: **Turkish:**
    * [anilozmen/clean-code-php](https://github.com/anilozmen/clean-code-php)
-
+   
 **[⬆ back to top](#table-of-contents)**
