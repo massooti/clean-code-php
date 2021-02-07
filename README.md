@@ -471,18 +471,18 @@ if ($a !== $b) {
 <p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
 
-## Functions
+## توابع
 
-### Function arguments (2 or fewer ideally)
+### آرگومانهای تابع  (در حالت ایده آل ۲ پارامتر یا کمتر)
 
-Limiting the amount of function parameters is incredibly important because it makes 
-testing your function easier. Having more than three leads to a combinatorial explosion 
-where you have to test tons of different cases with each separate argument.
+محدود کردن مقدار پارامترهای عملکرد بسیار مهم است زیرا 
+عملکرد تابع شما را آسان تر می کند. داشتن بیش از ۳ تا پارامتر در ورودی های تابع مورد نظر منجر به انفجار ترکیبی می شود
+که در آن شما باید تعداد موارد مختلف را با هر استدلال جداگانه آزمایش کنید. 
 
-Zero arguments is the ideal case. One or two arguments is ok, and three should be avoided. 
-Anything more than that should be consolidated. Usually, if you have more than two 
-arguments then your function is trying to do too much. In cases where it's not, most 
-of the time a higher-level object will suffice as an argument.
+بطور کلی ایجاد تابع بدون پارامتر ورودی بسیار ایده آل است. یک یا دو پارامتر هم خوب است و اما استفاده از سه پارامتر بیشتر در ورودی تابع باید تا حد امکان جلوگیری شود. باید از سه بحث جلوگیری شود
+هر چیزی بیش از این باید ادغام شود. معمولاً اگر بیش از دو نفر دارید
+آرگومان ها سپس عملکرد شما تلاش می کند کارهای زیادی انجام دهد. در مواردی که اینگونه نباشد ، بیشتر
+از آن زمان یک شی-سطح بالاتر به عنوان یک استدلال کافی است. 
 
 **Bad:**
 
@@ -518,13 +518,13 @@ function createMenu(MenuConfig $config): void
 
 **[⬆ back to top](#table-of-contents)**
 
-### Functions should do one thing
+### توابع باید فقط یک کار انجام دهند
 
-This is by far the most important rule in software engineering. When functions do more 
-than one thing, they are harder to compose, test, and reason about. When you can isolate 
-a function to just one action, they can be refactored easily and your code will read much 
-cleaner. If you take nothing else away from this guide other than this, you'll be ahead 
-of many developers.
+این مهمترین قانون در مهندسی نرم افزار است. وقتی یک تابع بیش از یک کار را انجام می دهد
+ متعاقبا نوشتن ، تست  و استدلال و کمپایل آن دشوار تر است. و وقتی شما یک تابع را ایزوله و محدود به انجام یک کار میکنید 
+ در آینده آن تابع  می تواند به راحتی بازسازی شود و کد شما بسیار روان تر ، تمیز تر و خواناتر خواهد شد
+ اگر غیر از این چیز دیگری از این راهنما بردارید ، پیش خواهید بود
+بسیاری از توسعه دهندگان
 
 **Bad:**
 ```php
