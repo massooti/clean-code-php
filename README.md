@@ -523,10 +523,9 @@ function createMenu(MenuConfig $config): void
 این مهمترین قانون در مهندسی نرم افزار است. وقتی یک تابع بیش از یک کار را انجام می دهد
  متعاقبا نوشتن ، تست  و استدلال و کمپایل آن دشوار تر است. و وقتی شما یک تابع را ایزوله و محدود به انجام یک کار میکنید 
  در آینده آن تابع  می تواند به راحتی بازسازی شود و کد شما بسیار روان تر ، تمیز تر و خواناتر خواهد شد
- اگر غیر از این چیز دیگری از این راهنما بردارید ، پیش خواهید بود
-بسیاری از توسعه دهندگان
+اهیمن این نکته بقدری بالاست که اگر از کل این داکیومنت فقط همین یک نکته را استفاده کنید ، دو هیچ از بقیه برنامه نویسا جلوترید.
 
-**Bad:**
+**بد:**
 ```php
 function emailClients(array $clients): void
 {
@@ -539,7 +538,7 @@ function emailClients(array $clients): void
 }
 ```
 
-**Good:**
+**خوب:**
 
 ```php
 function emailClients(array $clients): void
@@ -563,9 +562,9 @@ function isClientActive(int $client): bool
 
 **[⬆ back to top](#table-of-contents)**
 
-### Function names should say what they do
+### اسم تابع باید گویای کاری که قراره انجام بده باید باشه
 
-**Bad:**
+**بد:**
 
 ```php
 class Email
@@ -579,11 +578,11 @@ class Email
 }
 
 $message = new Email(...);
-// What is this? A handle for the message? Are we writing to a file now?
+// خب این الان چه اسمیه ؟! این الان یه تابع برای هندل کردن یه پیامه یا چی ؟! نکنه ما الان داریم یک نامه مینویسیم اصلا؟!!!
 $message->handle();
 ```
 
-**Good:**
+**خوب:**
 
 ```php
 class Email 
@@ -597,19 +596,18 @@ class Email
 }
 
 $message = new Email(...);
-// Clear and obvious
+//شفاف و واضح
 $message->send();
 ```
 
 **[⬆ back to top](#table-of-contents)**
 
-### Functions should only be one level of abstraction
+### توابع باید فقط یک سطح انتزاعی داشته باشند
 
-When you have more than one level of abstraction your function is usually
-doing too much. Splitting up functions leads to reusability and easier
-testing.
+وقتی  توی تابع بیش از یک سطح انتزاع داشته باشید ، عملیات توی تابع  شما معمولاً بیش از حد انجام می شود
+اینه که تقسییم محتوای یک تابع بزرگ به چندتا تابع کوچیک ، عملکرد و بهینگی کد شمارو بالاتر میبره. 
 
-**Bad:**
+**بد:**
 
 ```php
 function parseBetterJSAlternative(string $code): void
@@ -637,10 +635,11 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**Bad too:**
+**اینم باز داغونه:**
 
-We have carried out some of the functionality, but the `parseBetterJSAlternative()` function is still very complex and not testable.
-
+We have carried out some of the functionality, but the `parseBetterJSAlternative()` function is still very complex and not testable
+ `parseBetterJSAlternative()`تو این قسمت ما بعضی از کدهارو از تابع جدا کردیم ،اما همچنان  این تابع 
+ خیلی پیچیدس و به راحتی نمیشه اونو تست و استفاده کرد.
 ```php
 function tokenize(string $code): array
 {
@@ -679,10 +678,12 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**Good:**
+**خوب:**
 
 The best solution is move out the dependencies of `parseBetterJSAlternative()` function.
 
+بهترین راه برای هندل کردن همیچین توابعی اینه که تمام متعلقات و وابستگی های تابع رو ازش بیاری بیرون
+جدا کنی و هرجا که نیازه به متد پاس بدی ، دقیقا اینجاست که مفهوم dependency injection بکار میاد
 ```php
 class Tokenizer
 {
