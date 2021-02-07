@@ -516,16 +516,22 @@ function createMenu(MenuConfig $config): void
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
 
-### توابع باید فقط یک کار انجام دهند
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
+<h3 id="avoid-mental-mapping"  dir="rtl">
+<a class="anchor" name="avoid-mental-mapping" href="#avoid-mental-mapping">
+<span class="octicon octicon-link"></span></a>توابع باید فقط یک کار انجام دهند</h3>
+<p dir="rtl">
 این مهمترین قانون در مهندسی نرم افزار است. وقتی یک تابع بیش از یک کار را انجام می دهد
  متعاقبا نوشتن ، تست  و استدلال و کمپایل آن دشوار تر است. و وقتی شما یک تابع را ایزوله و محدود به انجام یک کار میکنید 
  در آینده آن تابع  می تواند به راحتی بازسازی شود و کد شما بسیار روان تر ، تمیز تر و خواناتر خواهد شد
 اهیمن این نکته بقدری بالاست که اگر از کل این داکیومنت فقط همین یک نکته را استفاده کنید ، دو هیچ از بقیه برنامه نویسا جلوترید.
+.
+</p>
 
-**بد:**
+<p dir="rtl"><strong>بد:</strong></p>
+
 ```php
 function emailClients(array $clients): void
 {
@@ -538,7 +544,7 @@ function emailClients(array $clients): void
 }
 ```
 
-**خوب:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 function emailClients(array $clients): void
