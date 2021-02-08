@@ -473,8 +473,12 @@ if ($a !== $b) {
 
 ## توابع
 
-### آرگومانهای تابع  (در حالت ایده آل ۲ پارامتر یا کمتر)
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
+<h3 id="avoid-mental-mapping"  dir="rtl">
+<a class="anchor" name="avoid-mental-mapping" href="#avoid-mental-mapping">
+### <span class="octicon octicon-link"></span></a>آرگومانهای تابع  (در حالت ایده آل ۲ پارامتر یا کمتر)</h3>
+<p dir="rtl">
 محدود کردن مقدار پارامترهای عملکرد بسیار مهم است زیرا 
 عملکرد تابع شما را آسان تر می کند. داشتن بیش از ۳ تا پارامتر در ورودی های تابع مورد نظر منجر به انفجار ترکیبی می شود
 که در آن شما باید تعداد موارد مختلف را با هر استدلال جداگانه آزمایش کنید. 
@@ -483,8 +487,10 @@ if ($a !== $b) {
 هر چیزی بیش از این باید ادغام شود. معمولاً اگر بیش از دو نفر دارید
 آرگومان ها سپس عملکرد شما تلاش می کند کارهای زیادی انجام دهد. در مواردی که اینگونه نباشد ، بیشتر
 از آن زمان یک شی-سطح بالاتر به عنوان یک استدلال کافی است. 
+</p>
 
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
+
 
 ```php
 function createMenu(string $title, string $body, string $buttonText, bool $cancellable): void
@@ -492,8 +498,7 @@ function createMenu(string $title, string $body, string $buttonText, bool $cance
     // ...
 }
 ```
-
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 class MenuConfig
@@ -520,7 +525,7 @@ function createMenu(MenuConfig $config): void
 <p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
 <h3 id="avoid-mental-mapping"  dir="rtl">
-<a class="anchor" name="avoid-mental-mapping" href="#avoid-mental-mapping">
+<a class="anchor" name="avoid-mental-mapping" href="#function-names-should-say-what-they-do">
 <span class="octicon octicon-link"></span></a>توابع باید فقط یک کار انجام دهند</h3>
 <p dir="rtl">
 این مهمترین قانون در مهندسی نرم افزار است. وقتی یک تابع بیش از یک کار را انجام می دهد
@@ -568,9 +573,17 @@ function isClientActive(int $client): bool
 
 **[⬆ back to top](#table-of-contents)**
 
-### اسم تابع باید گویای کاری که قراره انجام بده باید باشه
+### 
 
-**بد:**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
+
+<h3 id="avoid-mental-mapping"  dir="rtl">
+<a class="anchor" name="avoid-mental-mapping" href="#function-names-should-say-what-they-do">
+<span class="octicon octicon-link"></span></a>اسم تابع باید گویای کاری که قراره انجام بده باشه</h3>
+
+
+<p dir="rtl"><strong>بد:</strong></p>
+
 
 ```php
 class Email
@@ -584,7 +597,10 @@ class Email
 }
 
 $message = new Email(...);
-// خب این الان چه اسمیه ؟! این الان یه تابع برای هندل کردن یه پیامه یا چی ؟! نکنه ما الان داریم یک نامه مینویسیم اصلا؟!!!
+/* خب این الان چه اسمیه ؟! 
+این الان یه تابع برای هندل کردن یه پیامه یا چی ؟! 
+نکنه ما الان داریم یک نامه مینویسیم اصلا؟!!!
+*/
 $message->handle();
 ```
 
@@ -610,10 +626,21 @@ $message->send();
 
 ### توابع باید فقط یک سطح انتزاعی داشته باشند
 
-وقتی  توی تابع بیش از یک سطح انتزاع داشته باشید ، عملیات توی تابع  شما معمولاً بیش از حد انجام می شود
-اینه که تقسییم محتوای یک تابع بزرگ به چندتا تابع کوچیک ، عملکرد و بهینگی کد شمارو بالاتر میبره. 
 
-**بد:**
+
+
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
+
+<h3 id="avoid-mental-mapping"  dir="rtl">
+<a class="anchor" name="avoid-mental-mapping" href="#functions-should-only-be-one-level-of-abstraction">
+<span class="octicon octicon-link"></span></a>توابع باید فقط یک کار انجام دهند</h3>
+<p dir="rtl">
+اوقتی  توی تابع بیش از یک سطح انتزاع داشته باشید ، عملیات توی تابع  شما معمولاً بیش از حد انجام می شود
+اینه که تقسییم محتوای یک تابع بزرگ به چندتا تابع کوچیک ، عملکرد و بهینگی کد شمارو بالاتر میبره
+.
+</p>
+
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 function parseBetterJSAlternative(string $code): void
@@ -640,12 +667,14 @@ function parseBetterJSAlternative(string $code): void
     }
 }
 ```
+<p dir="rtl"><strong>اینم باز داغونه:</strong></p>
 
-**اینم باز داغونه:**
-
-We have carried out some of the functionality, but the `parseBetterJSAlternative()` function is still very complex and not testable
+<p dir="rtl">
  `parseBetterJSAlternative()`تو این قسمت ما بعضی از کدهارو از تابع جدا کردیم ،اما همچنان  این تابع 
- خیلی پیچیدس و به راحتی نمیشه اونو تست و استفاده کرد.
+ خیلی پیچیدس و به راحتی نمیشه اونو تست و استفاده کرد
+.
+</p>
+
 ```php
 function tokenize(string $code): array
 {
@@ -684,12 +713,13 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**خوب:**
-
-The best solution is move out the dependencies of `parseBetterJSAlternative()` function.
-
+<p dir="rtl"><strong>خوب:</strong></p>
+<p dir="rtl">
 بهترین راه برای هندل کردن همیچین توابعی اینه که تمام متعلقات و وابستگی های تابع رو ازش بیاری بیرون
 جدا کنی و هرجا که نیازه به متد پاس بدی ، دقیقا اینجاست که مفهوم dependency injection بکار میاد
+.
+</p>
+
 ```php
 class Tokenizer
 {
@@ -748,7 +778,20 @@ class BetterJSAlternative
 
 **[⬆ back to top](#table-of-contents)**
 
-### Don't use flags as function parameters
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
+
+<h3 id="dont-use-flags-as-function-parameters"  dir="rtl">
+<a class="anchor" name="dont-use-flags-as-function-parameters" href="#dont-use-flags-as-function-parameters">
+<span class="octicon octicon-link"></span></a>از پارامتر های flag در توابع استفاده نکنید</h3>
+<p dir="rtl">
+.
+</p>
+
+<p dir="rtl"><strong>بد:</strong></p>
+
+
+
+
 
 Flags tell your user that this function does more than one thing. Functions should 
 do one thing. Split out your functions if they are following different code paths 
