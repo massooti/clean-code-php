@@ -621,19 +621,11 @@ $message = new Email(...);
 //شفاف و واضح
 $message->send();
 ```
-
-**[⬆ back to top](#table-of-contents)**
-
-### توابع باید فقط یک سطح انتزاعی داشته باشند
-
-
-
-
 <p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
 <h3 id="avoid-mental-mapping"  dir="rtl">
 <a class="anchor" name="avoid-mental-mapping" href="#functions-should-only-be-one-level-of-abstraction">
-<span class="octicon octicon-link"></span></a>توابع باید فقط یک کار انجام دهند</h3>
+<span class="octicon octicon-link"></span></a>توابع باید فقط یک سطح انتزاعی داشته باشند</h3>
 <p dir="rtl">
 اوقتی  توی تابع بیش از یک سطح انتزاع داشته باشید ، عملیات توی تابع  شما معمولاً بیش از حد انجام می شود
 اینه که تقسییم محتوای یک تابع بزرگ به چندتا تابع کوچیک ، عملکرد و بهینگی کد شمارو بالاتر میبره
@@ -784,20 +776,12 @@ class BetterJSAlternative
 <a class="anchor" name="dont-use-flags-as-function-parameters" href="#dont-use-flags-as-function-parameters">
 <span class="octicon octicon-link"></span></a>از پارامتر های flag در توابع استفاده نکنید</h3>
 <p dir="rtl">
-.
+پرچم ها به  شما می گویند که این تابع بیش از یک کار انجام می دهد. همونطور که قبلا گفته شد میدونیم که توابع باید
+یک کار انجام دهند اگر تابع  شما مسیرهای مختلفی را دنبال می کنند ، با ساتفاده از پارامتر های منطقی و بولین خروجی تابع را  تقسیم کنید
+
 </p>
 
 <p dir="rtl"><strong>بد:</strong></p>
-
-
-
-
-
-Flags tell your user that this function does more than one thing. Functions should 
-do one thing. Split out your functions if they are following different code paths 
-based on a boolean.
-
-**Bad:**
 
 ```php
 function createFile(string $name, bool $temp = false): void
