@@ -794,7 +794,7 @@ function createFile(string $name, bool $temp = false): void
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 function createFile(string $name): void
@@ -808,29 +808,27 @@ function createTempFile(string $name): void
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid Side Effects
 
-A function produces a side effect if it does anything other than take a value in and 
-return another value or values. A side effect could be writing to a file, modifying 
-some global variable, or accidentally wiring all your money to a stranger.
 
-Now, you do need to have side effects in a program on occasion. Like the previous 
-example, you might need to write to a file. What you want to do is to centralize where 
-you are doing this. Don't have several functions and classes that write to a particular 
-file. Have one service that does it. One and only one.
+<h3 id="avoid-side-effects"  dir="rtl">
+<a class="anchor" name="dont-use-flags-as-function-parameters" href="#avoid-side-effects">
+<span class="octicon octicon-link"></span></a>از عوارض جانبی خودداری کنید</h3>
+<p dir="rtl">
+یک تابع در صورت انجام کار دیگری غیر از گرفتن مقدار و بازگرداندن مقدار یا مقادیر دیگر ، یک اثر جانبی ایجاد می کند. 
+یک عارضه جانبی که کاملا ناخواسته بر روند تابع شما تاثیر میگذارد  می تواند در نوشتن  یک فایل ،تغییر برخی از متغیر های گلوبال رخ دهد.
+حالا ، شما نیاز دارید که عوارض جانبی آن را در یک برنامه ، گاه به گاه داشته باشید. مانند مثال قبلی ، شاید لازم باشد که در یک پرونده بنویسید 
+.کاری که می خواهید انجام بدید اینه که در محلی که این کار را انجام می دهید متمرکز شوید. چندین عملکرد و کلاس وجود ندارد که در یک فایل خاص بنویسند. یک سرویس داشته باشید که آن را انجام دهد. یکی و فقط یکی 
+نکته اصلی این است که از مشکلات مشترک مانند تقسیم حالت بین اشیا بدون هیچ ساختار جلوگیری کنید ، با استفاده از انواع داده های قابل تغییر که توسط همه افراد قابل نوشتن است و درمورد بروز عوارض جانبی متمرکز نیست.
+اگر بتوانید این کار را انجام دهید ، از اکثریت قریب به اتفاق سایر برنامه نویسان خوشحال خواهید بود.
+</p>
 
-The main point is to avoid common pitfalls like sharing state between objects without
-any structure, using mutable data types that can be written to by anything, and not 
-centralizing where your side effects occur. If you can do this, you will be happier 
-than the vast majority of other programmers.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
-// Global variable referenced by following function.
-// If we had another function that used this name, now it'd be an array and it could break it.
+// متغیر های گلوبال با تابع زیر ارجاعا داده میشوند
+//اگر عملکرد دیگری داشتیم که از این نام استفاده می کرد ، اکنون یک آرایه است و می تواند آن را بشکند.
 $name = 'Ryan McDermott';
 
 function splitIntoFirstAndLastName(): void
@@ -845,7 +843,7 @@ splitIntoFirstAndLastName();
 var_dump($name); // ['Ryan', 'McDermott'];
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 function splitIntoFirstAndLastName(string $name): array
@@ -860,17 +858,19 @@ var_dump($name); // 'Ryan McDermott';
 var_dump($newName); // ['Ryan', 'McDermott'];
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Don't write to global functions
+<h3 id="dont-write-to-global-functions"  dir="rtl">
+<a class="anchor" name="dont-write-to-global-functions" href="#dont-write-to-global-functions">
+<span class="octicon octicon-link"></span></a>از توابع گلوبال استفاده نکنید</h3>
+<p dir="rtl">
+استفاده از توابع گلوبال ایده بسیار بدیه که متاسفانه تو خیلی از زبون های برنامه نویسی ما شاهدش هستیم ، 
+استفاده از این توابع ممکنه با توابع از پیش ساخته شده قبلی توی برنامه دچار تداخل بشه ، و مشکل بوجود بیاره ،
+بعنوان مثال فرض کنیم شما میخواید یک تابع گلوبال با عنوان  `config()` به قطعه برنامتون اضافه کنید 
+اما این ممکنه با تابعی از یک کتابخونه دیگر دچار مشکل شود.
+</p>
 
-Polluting globals is a bad practice in many languages because you could clash with another 
-library and the user of your API would be none-the-wiser until they get an exception in 
-production. Let's think about an example: what if you wanted to have configuration array?
-You could write global function like `config()`, but it could clash with another library 
-that tried to do the same thing.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 function config(): array
@@ -880,8 +880,8 @@ function config(): array
     ]
 }
 ```
+<p dir="rtl"><strong>خوب:</strong></p>
 
-**Good:**
 
 ```php
 class Configuration
@@ -899,21 +899,29 @@ class Configuration
     }
 }
 ```
-
 Load configuration and create instance of `Configuration` class 
-
+فرخوانی کلاس `Configuration` و ایجاد یک مقدار از آن
 ```php
 $configuration = new Configuration([
     'foo' => 'bar',
 ]);
 ```
+حالا شما برای استفاده از این مقدار باید کلاس `Configuration` توی برنامتون فراخوانی کنید
 
-And now you must use instance of `Configuration` in your application.
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-**[⬆ back to top](#table-of-contents)**
+<h3 id="dont-use-a-singleton-pattern"  dir="rtl">
+<a class="anchor" name="dont-use-a-singleton-pattern" href="#dont-use-a-singleton-pattern">
+<span class="octicon octicon-link"></span></a> از دیزاین پترن `singleton`  استفاده نکنید
+</h3>
+<p dir="rtl">
 
-### Don't use a Singleton pattern
+</p>
 
+<p dir="rtl"><strong>بد:</strong></p>
+
+
+دیزاین پترن سینگلتون یک آنتی پترنه [anti-pattern](https://en.wikipedia.org/wiki/Singleton_pattern).  ازبیانات آقای برایان باتن : 
 Singleton is an [anti-pattern](https://en.wikipedia.org/wiki/Singleton_pattern). Paraphrased from Brian Button:
  1. They are generally used as a **global instance**, why is that so bad? Because **you hide the dependencies** of your application in your code, instead of exposing them through the interfaces. Making something global to avoid passing it around is a [code smell](https://en.wikipedia.org/wiki/Code_smell).
  2. They violate the [single responsibility principle](#single-responsibility-principle-srp): by virtue of the fact that **they control their own creation and lifecycle**.
