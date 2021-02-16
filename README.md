@@ -916,10 +916,9 @@ $configuration = new Configuration([
 </h3>
 <p dir="rtl">
 دیزاین پترن سینگلتون یک آنتی پترنه [anti-pattern](https://en.wikipedia.org/wiki/Singleton_pattern).  ازبیانات آقای برایان باتن : 
-1 . اینها معمولا بعنوان **مقادیر گلوبال** استفاده میشوند ، حالا این مشکلش چیه ؟ بدلیل اینکه با این کار شما **دیپندسی و وابستگی های** برنامتون رو پنهان میکنید ، در عوض به جای اینکه آنها را از کلاس های رابط و اینترفیس به برنامه پاس بدهیم ، چیزهایی رو باید گلوبال کنیم تا از 
- 1. They are generally used as a **global instance**, why is that so bad? Because **you hide the dependencies** of your application in your code, instead of exposing them through the interfaces. Making something global to avoid passing it around is a [code smell](https://en.wikipedia.org/wiki/Code_smell).
- 2. They violate the [single responsibility principle](#single-responsibility-principle-srp): by virtue of the fact that **they control their own creation and lifecycle**.
- 3. They inherently cause code to be tightly [coupled](https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29). This makes faking them out under **test rather difficult** in many cases.
+1 . اینها معمولا بعنوان **مقادیر گلوبال** استفاده میشوند ، حالا این مشکلش چیه ؟ بدلیل اینکه با این کار شما **دیپندسی و وابستگی های** برنامتون رو پنهان میکنید ، در عوض به جای اینکه آنها را از کلاس های رابط و اینترفیس به برنامه پاس بدهیم ، چیزهایی رو باید گلوبال کنیم تا از بد خطی جلوگیری کنیم [code smell](https://en.wikipedia.org/wiki/Code_smell).
+ 2. اینها قانون اصول  سالید را لغو میکنند [single responsibility principle](#single-responsibility-principle-srp): به موجب این واقعیت که **این نوع توابع به تنهایی چرخه حیات خودشون رو شکل میدهند**.
+ 3. آنها ذاتاً باعث می شوند که کد فشرده باشد [coupled](https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29). این باعث می شود آنها را جعل کنید**تست این توابع نسبتا دشوار است** در بیشتر موارد.
  4. They carry state around for the lifetime of the application. Another hit to testing since **you can end up with a situation where tests need to be ordered** which is a big no for unit tests. Why? Because each unit test should be independent from the other.
 
 There is also very good thoughts by [Misko Hevery](http://misko.hevery.com/about/) about the [root of problem](http://misko.hevery.com/2008/08/25/root-cause-of-singletons/).
