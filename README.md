@@ -919,9 +919,9 @@ $configuration = new Configuration([
 1 . اینها معمولا بعنوان **مقادیر گلوبال** استفاده میشوند ، حالا این مشکلش چیه ؟ بدلیل اینکه با این کار شما **دیپندسی و وابستگی های** برنامتون رو پنهان میکنید ، در عوض به جای اینکه آنها را از کلاس های رابط و اینترفیس به برنامه پاس بدهیم ، چیزهایی رو باید گلوبال کنیم تا از بد خطی جلوگیری کنیم [code smell](https://en.wikipedia.org/wiki/Code_smell).
  2. اینها قانون اصول  سالید را لغو میکنند [single responsibility principle](#single-responsibility-principle-srp): به موجب این واقعیت که **این نوع توابع به تنهایی چرخه حیات خودشون رو شکل میدهند**.
  3. آنها ذاتاً باعث می شوند که کد فشرده باشد [coupled](https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29). این باعث می شود آنها را جعل کنید**تست این توابع نسبتا دشوار است** در بیشتر موارد.
- 4. They carry state around for the lifetime of the application. Another hit to testing since **you can end up with a situation where tests need to be ordered** which is a big no for unit tests. Why? Because each unit test should be independent from the other.
+ 4. آنها حالت را در طول عمر برنامه حمل می کنند. یک ضربه مهم دیگر برای تست زدن از ** شما می توانید در شرایطی به نتیجه برسید که تست ها باید سفارش داده شوند ** که امتیاز بزرگی برای تست های واحدی نیست. چرا؟ زیرا هر آزمون واحد باید از دیگری مستقل باشد.
 
-There is also very good thoughts by [Misko Hevery](http://misko.hevery.com/about/) about the [root of problem](http://misko.hevery.com/2008/08/25/root-cause-of-singletons/).
+نکات خوبی هم ایشون توی این بلاگ عنوان کرده آقای [میسکو هاروی](http://misko.hevery.com/about/) در مورد [ریشه مشکلات](http://misko.hevery.com/2008/08/25/root-cause-of-singletons/).
 </p>
 <p dir="rtl"><strong>بد:</strong></p>
 
@@ -950,7 +950,7 @@ class DBConnection
 $singleton = DBConnection::getInstance();
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 class DBConnection
@@ -964,19 +964,28 @@ class DBConnection
 }
 ```
 
-Create instance of `DBConnection` class and configure it with [DSN](http://php.net/manual/en/pdo.construct.php#refsect1-pdo.construct-parameters).
+
+<p dir="rtl">
+ایجاد یک مقدار از کلاس`DBConnection` و کانفیگ کردن آن با  [DSN](http://php.net/manual/en/pdo.construct.php#refsect1-pdo.construct-parameters).
+</p>
+
 
 ```php
 $connection = new DBConnection($dsn);
 ```
 
-And now you must use instance of `DBConnection` in your application.
+<p dir="rtl">
+و حالا شما باید از مقدار کلاس `DBConnection` در برنامه استفاده کنید
+</p>
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Encapsulate conditionals
-
-**Bad:**
+<h3 id="encapsulate-conditionals"  dir="rtl">
+<a class="anchor" name="encapsulate-conditionals" href="#encapsulate-conditionals">
+<span class="octicon octicon-link"></span></a> 
+شرطی هارا کپسوله کنید
+</h3>
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 if ($article->state === 'published') {
@@ -984,7 +993,7 @@ if ($article->state === 'published') {
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 if ($article->isPublished()) {
@@ -992,11 +1001,15 @@ if ($article->isPublished()) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid negative conditionals
+<h3 id="avoid-negative-conditionals"  dir="rtl">
+<a class="anchor" name="avoid-negative-conditionals" href="#avoid-negative-conditionals">
+<span class="octicon octicon-link"></span></a> 
+از شرطی ها منفی خود داری کنید
+</h3>
 
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 function isDOMNodeNotPresent(\DOMNode $node): bool
@@ -1010,7 +1023,7 @@ if (!isDOMNodeNotPresent($node))
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 function isDOMNodePresent(\DOMNode $node): bool
@@ -1023,7 +1036,7 @@ if (isDOMNodePresent($node)) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
 ### Avoid conditionals
 
@@ -1035,8 +1048,24 @@ answer is a previous clean code concept we learned: a function should only do
 one thing. When you have classes and functions that have `if` statements, you
 are telling your user that your function does more than one thing. Remember,
 just do one thing.
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-**Bad:**
+<h3 id="avoid-conditionals"  dir="rtl">
+<a class="anchor" name="avoid-conditionals" href="#avoid-conditionals">
+<span class="octicon octicon-link"></span></a> 
+از شرطی ها منفی خود داری کنید
+</h3>
+<p dir="rtl">
+به نظر می رسد این یک کار غیرممکن است. با شنیدن این حرف ، اکثر مردم می گویند ، "چگونه قرار است بدون دستور" if "کاری انجام دهم؟
+پاسخ این است که شما می توانید برای رسیدن به همان کار در بسیاری از موارد از چند شکلی استفاده کنید
+سوال دوم معمولاً این است ، "خوب این عالی است اما چرا من می خواهم این کار را انجام دهم؟"
+پاسخ یک مفهوم کد پاک قبلی است که ما آموخته ایم: یک تابع فقط باید یک کار انجام دهد
+هنگامی که کلاسها و توابع دارید که عبارت «if» دارند ، شما
+به کاربر شما می گویند عملکرد شما بیش از یک کار انجام می دهد
+</p>
+
+
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 class Airplane
