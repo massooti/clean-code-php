@@ -1038,18 +1038,6 @@ if (isDOMNodePresent($node)) {
 
 <p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-### Avoid conditionals
-
-This seems like an impossible task. Upon first hearing this, most people say,
-"how am I supposed to do anything without an `if` statement?" The answer is that
-you can use polymorphism to achieve the same task in many cases. The second
-question is usually, "well that's great but why would I want to do that?" The
-answer is a previous clean code concept we learned: a function should only do
-one thing. When you have classes and functions that have `if` statements, you
-are telling your user that your function does more than one thing. Remember,
-just do one thing.
-<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
-
 <h3 id="avoid-conditionals"  dir="rtl">
 <a class="anchor" name="avoid-conditionals" href="#avoid-conditionals">
 <span class="octicon octicon-link"></span></a> 
@@ -1062,6 +1050,7 @@ just do one thing.
 پاسخ یک مفهوم کد پاک قبلی است که ما آموخته ایم: یک تابع فقط باید یک کار انجام دهد
 هنگامی که کلاسها و توابع دارید که عبارت «if» دارند ، شما
 به کاربر شما می گویند عملکرد شما بیش از یک کار انجام می دهد
+به یاد داشته باشید ، فقط یک کار انجام دهید.
 </p>
 
 
@@ -1086,7 +1075,7 @@ class Airplane
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 interface Airplane
@@ -1126,17 +1115,20 @@ class Cessna implements Airplane
     }
 }
 ```
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-**[⬆ back to top](#table-of-contents)**
+<h3 id="avoid-type-checking-part-1"  dir="rtl">
+<a class="anchor" name="#avoid-type-checking-part-1" href="##avoid-type-checking-part-1">
+<span class="octicon octicon-link"></span></a> 
+از تایپ چکینگ خودداری کنید -۱
+</h3>
+<p dir="rtl">
+PHP تایپ نشده است ، به این معنی که عملکردهای شما می توانند هر نوع استدلال را بپذیرند. 
+پاسخ این است که شما می توانید برای رسیدن به همان کار در بسیاری از موارد از چند شکلی استفاده کنیدگاهی اوقات شما از این آزادی گزیده می شوید و انجام نوع بررسی در عملکردهای شما وسوسه انگیز می شود. 
+</p>
 
-### Avoid type-checking (part 1)
 
-PHP is untyped, which means your functions can take any type of argument.
-Sometimes you are bitten by this freedom and it becomes tempting to do
-type-checking in your functions. There are many ways to avoid having to do this.
-The first thing to consider is consistent APIs.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 function travelToTexas($vehicle): void
@@ -1149,7 +1141,7 @@ function travelToTexas($vehicle): void
 }
 ```
 
-**Good:**
+<p dir="rtl"><strong>خوب:</strong></p>
 
 ```php
 function travelToTexas(Traveler $vehicle): void
@@ -1157,22 +1149,25 @@ function travelToTexas(Traveler $vehicle): void
     $vehicle->travelTo(new Location('texas'));
 }
 ```
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
-**[⬆ back to top](#table-of-contents)**
+<h3 id="avoid-type-checking-part-2"  dir="rtl">
+<a class="anchor" name="#avoid-type-checking-part-2" href="##avoid-type-checking-part-2">
+<span class="octicon octicon-link"></span></a> 
+از تایپ چکینگ خودداری کنید -2
+</h3>
+<p dir="rtl">
+اگر با مقادیر ابتدایی ابتدایی مانند رشته ها ، اعداد صحیح و آرایه ها کار می کنید و از PHP 7+ استفاده می کنید و نمی توانید از چند شکلی استفاده کنید اما هنوز نیاز دارید که
+تایپ چکینگ استفاده میکنید ، به این نکته توجه داشته باشید که 
+[اعلان نوع متغیر](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
+این روش سطح بالایی از استاندارد کد نویسی را برای شما به ارمغان می آورد.
+مشکلی که در بررسی دستی دستی وجود دارد این است که انجام آن به چنان اصطلاحات اضافی نیاز دارد که "ایمنی نوع" ساختگی شما خوانایی از دست رفته را جبران نمی کند
+PHP خود را تمیز نگه دارید ، تست های خوبی بنویسید و بررسی های خوبی در مورد کد داشته باشید.
+در غیر این صورت ، همه این کارها را انجام دهید اما با اعلام نوع دقیق PHP یا حالت دقیق.
+</p>
 
-### Avoid type-checking (part 2)
 
-If you are working with basic primitive values like strings, integers, and arrays,
-and you use PHP 7+ and you can't use polymorphism but you still feel the need to
-type-check, you should consider
-[type declaration](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
-or strict mode. It provides you with static typing on top of standard PHP syntax.
-The problem with manually type-checking is that doing it will require so much
-extra verbiage that the faux "type-safety" you get doesn't make up for the lost
-readability. Keep your PHP clean, write good tests, and have good code reviews.
-Otherwise, do all of that but with PHP strict type declaration or strict mode.
-
-**Bad:**
+<p dir="rtl"><strong>بد:</strong></p>
 
 ```php
 function combine($val1, $val2): int
@@ -1184,8 +1179,7 @@ function combine($val1, $val2): int
     return $val1 + $val2;
 }
 ```
-
-**Good:**
+<p dir="rtl"><strong>خوب :</strong></p>
 
 ```php
 function combine(int $val1, int $val2): int
@@ -1194,13 +1188,29 @@ function combine(int $val1, int $val2): int
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+<p dir="rtl"><strong><a href="#table-of-contents">⬆ بازگشت به بالا</a></strong></p>
 
 ### Remove dead code
 
 Dead code is just as bad as duplicate code. There's no reason to keep it in
 your codebase. If it's not being called, get rid of it! It will still be safe
 in your version history if you still need it.
+
+<h3 id="remove-dead-code"  dir="rtl">
+<a class="anchor" name="#remove-dead-code" href="##remove-dead-code">
+<span class="octicon octicon-link"></span></a> 
+از تایپ چکینگ خودداری کنید -2
+</h3>
+<p dir="rtl">
+اگر با مقادیر ابتدایی ابتدایی مانند رشته ها ، اعداد صحیح و آرایه ها کار می کنید و از PHP 7+ استفاده می کنید و نمی توانید از چند شکلی استفاده کنید اما هنوز نیاز دارید که
+تایپ چکینگ استفاده میکنید ، به این نکته توجه داشته باشید که 
+[اعلان نوع متغیر](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
+این روش سطح بالایی از استاندارد کد نویسی را برای شما به ارمغان می آورد.
+مشکلی که در بررسی دستی دستی وجود دارد این است که انجام آن به چنان اصطلاحات اضافی نیاز دارد که "ایمنی نوع" ساختگی شما خوانایی از دست رفته را جبران نمی کند
+PHP خود را تمیز نگه دارید ، تست های خوبی بنویسید و بررسی های خوبی در مورد کد داشته باشید.
+در غیر این صورت ، همه این کارها را انجام دهید اما با اعلام نوع دقیق PHP یا حالت دقیق.
+</p>
+
 
 **Bad:**
 
